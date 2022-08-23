@@ -13,7 +13,7 @@ public class HomeRestController{
         return """
                 Hello.
                 It works!
-                現在時刻は％sです。
+                現在時刻は%sです。
                 """.formatted(LocalDateTime.now());
     }
 }
