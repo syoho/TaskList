@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+
+//HomeRestController：コントローラ；WEBページから送られてくるHTTPリクエストを処理する部分
 @RestController//@RestControllerアノテーションはユーザーインタフェースとしてのHTMLを返さないWEBアプリケーションを作る場合に使われます
 public class HomeRestController{
 
@@ -27,6 +29,7 @@ public class HomeRestController{
                 """.formatted(LocalDateTime.now());
     }
 
+    //モデル；タスクの情報を保持する
     @GetMapping("/restadd")
     String addItem(@RequestParam("task")String task,
                    @RequestParam("deadline")String deadline){
