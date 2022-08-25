@@ -10,12 +10,22 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController//@RestControllerアノテーションはユーザーインタフェースとしてのHTMLを返さないWEBアプリケーションを作る場合に使われます
 public class HomeRestController{
 
     record TaskItem(String id,String task,String deadline,boolean done){}
     private List<TaskItem>taskItems = new ArrayList<>();
+
+    @RequestMapping("/resthello")//リクエストを処理するメソッドであることを表す
+    String hello(){
+        return """
+                Hello.
+                It works!
+                現在時刻は%sです。
+                """.formatted(LocalDateTime.now());
+    }
 
     @GetMapping("/restadd")
     String addItem(@RequestParam("task")String task,
@@ -27,14 +37,14 @@ public class HomeRestController{
         return "タスクを追加しました！";
     }
 
-    @RequestMapping("/resthello")//リクエストを処理するメソッドであることを表す
-    String hello(){
-        return """
-                Hello.
-                It works!
-                現在時刻は%sです。
-                """.formatted(LocalDateTime.now());
+    @GetMapping("/restlist")
+    String listItems(){
+        String result = taskItems.stream()
+                .map(TaskItem::toString)
+                .collect(Collectors.joining(","));
+        return result;
     }
+
 
 
 }
