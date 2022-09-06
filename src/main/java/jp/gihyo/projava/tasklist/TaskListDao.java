@@ -3,6 +3,7 @@
 
 package jp.gihyo.projava.tasklist;
 
+import jp.gihyo.projava.tasklist.HomeController.TaskItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,24 +25,30 @@ public class TaskListDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void add(HomeController.TaskItem taskItem){
+    public void add(TaskItem taskItem){
         SqlParameterSource param = new BeanPropertySqlParameterSource(taskItem);
         SimpleJdbcInsert insert =
                 new SimpleJdbcInsert(jdbcTemplate).withTableName("tasklist");
         insert.execute(param);
     }
 
-    public List<HomeController.TaskItem> findAll(){
+    public List<TaskItem> findAll(){
         String query = "SELECT * FROM tasklist";
 
         List<Map<String,Object>>result = jdbcTemplate.queryForList(query);
-        List<HomeController.TaskItem>taskItems = result.stream().map((Map<String,Object> row) -> new HomeController.TaskItem(
+        List<TaskItem>taskItems = result.stream().map((Map<String,Object> row) -> new TaskItem(
                 row.get("id").toString(),
                 row.get("task").toString(),
                 row.get("deadline").toString(),
                 (Boolean)row.get("done")))
                 .toList();
         return taskItems;
+    }
+
+    //指定したレコードを削除するdeleteメソードを追加する
+    public int delete(String id){
+        int number = jdbcTemplate.update("DELETE FROM tasklist WHERE id =?",id);
+        return number;
     }
 
 }

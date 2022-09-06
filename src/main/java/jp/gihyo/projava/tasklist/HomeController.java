@@ -17,6 +17,16 @@ import java.util.UUID;
 @Controller
 public class HomeController {
 
+    //TaskListDaoクラスのフィールド
+    private final TaskListDao dao;
+
+
+    //TaskListDaoクラスのコンストラクタ
+    @Autowired
+    HomeController(TaskListDao dao){
+        this.dao = dao;
+    }
+
 
     @RequestMapping(value="/hello")
     String hello(Model model){
@@ -65,16 +75,12 @@ public class HomeController {
     }*/
 
 
-    //TaskListDaoクラスのフィールド
-    private final TaskListDao dao;
-
-
-    //TaskListDaoクラスのコンストラクタ
-    @Autowired
-    HomeController(TaskListDao dao){
-        this.dao = dao;
+    //タスク情報を削除するエンドポイント
+    @GetMapping("/delete")
+    String deleteItem(@RequestParam("id")String id){
+        dao.delete(id);
+        return "redirect:/list";
     }
-
 
 
 
