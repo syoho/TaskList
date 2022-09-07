@@ -1,5 +1,4 @@
 
-//テーブルを作成するSQL文
 CREATE TABLE IF NOT EXISTS tasklist(
 id VARCHAR(8) PRIMARY KEY,
 task VARCHAR(256),

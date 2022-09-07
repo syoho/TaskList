@@ -51,4 +51,14 @@ public class TaskListDao {
         return number;
     }
 
+    //指定したレコードの登録内容を更新するためのupdateメソッドを追加する
+    public int update(TaskItem taskItem){
+        int number = jdbcTemplate.update(
+                "UPDATE tasklist SET task = ?,deadline = ?,done = ? WHERE id = ?",
+                taskItem.task(),
+                taskItem.deadline(),
+                taskItem.done(),
+                taskItem.id());
+        return number;
+    }
 }
