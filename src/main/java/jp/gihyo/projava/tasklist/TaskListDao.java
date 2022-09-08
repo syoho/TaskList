@@ -1,6 +1,11 @@
 
 //データベース操作用のクラスを作成する
 
+//-DAO
+//-Data Access Object
+//-データベースにアクセスするための窓口となるオブジェクト
+//-TaskListDaoクラス
+
 package jp.gihyo.projava.tasklist;
 
 import jp.gihyo.projava.tasklist.HomeController.TaskItem;
@@ -20,10 +25,14 @@ public class TaskListDao {
 
     private final JdbcTemplate jdbcTemplate;
 
+
+
     @Autowired
     TaskListDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
     }
+
+
 
     public void add(TaskItem taskItem){
         SqlParameterSource param = new BeanPropertySqlParameterSource(taskItem);
@@ -54,7 +63,7 @@ public class TaskListDao {
     //指定したレコードの登録内容を更新するためのupdateメソッドを追加する
     public int update(TaskItem taskItem){
         int number = jdbcTemplate.update(
-                "UPDATE tasklist SET task = ?,deadline = ?,done = ? WHERE id = ?",
+                "UPDATE tasklist SET task = ?,deadline = ?,done = ? WHERE id = ?",//注意：間違いを犯す可能性が高い
                 taskItem.task(),
                 taskItem.deadline(),
                 taskItem.done(),

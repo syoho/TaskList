@@ -17,15 +17,23 @@ import java.util.UUID;
 @Controller
 public class HomeController {
 
-    //TaskListDaoクラスのフィールド
+
+
+    //フィールド宣言する
+    //-フィールド
+    //-field/字段
+    //-オブジェクトに関する情報を保持する
     private final TaskListDao dao;
 
 
+
+    //初期化する
     //TaskListDaoクラスのコンストラクタ
     @Autowired
     HomeController(TaskListDao dao){
         this.dao = dao;
     }
+
 
 
     @RequestMapping(value="/hello")
