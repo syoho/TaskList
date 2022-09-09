@@ -6,27 +6,35 @@
 //-データベースにアクセスするための窓口となるオブジェクト
 //-TaskListDaoクラス
 
+
+
 package jp.gihyo.projava.tasklist;
 
 import jp.gihyo.projava.tasklist.HomeController.TaskItem;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
+
+
 
 @Service
 public class TaskListDao {
 
+    //JdbcTemplateはSpring JDBCに用意されているタスク・データベースを活用するための機能を提供している
+    //変数はfinalになっているので、一度値をセットしたら変更できません
     private final JdbcTemplate jdbcTemplate;
 
 
 
+    //コンストラクタ・constructor・构造方法
+    //フィールド値の初期化・Field
+    //@Autowiredアノテーションを付けることで、SpringBootはコンストラクタを呼び出す際に適切なオブジェクトを作成して渡してくれるようになります
+    //DI・Dependency Injection・依存性の注入（ちゅうにゅう）
     @Autowired
     TaskListDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
