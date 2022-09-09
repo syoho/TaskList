@@ -31,7 +31,9 @@ public class TaskListDao {
 
 
 
-    //コンストラクタ・constructor・构造方法
+    //コンストラクタ・constructor・构造器
+    //new创建对象；constructor完成对新对象的初始化
+    //特点：1）方法名与类名相同；2）没有返回值；3）系统自动调用该类构造期完成对象的初始化
     //フィールド値の初期化・Field
     //@Autowiredアノテーションを付けることで、SpringBootはコンストラクタを呼び出す際に適切なオブジェクトを作成して渡してくれるようになります
     //DI・Dependency Injection・依存性の注入（ちゅうにゅう）
