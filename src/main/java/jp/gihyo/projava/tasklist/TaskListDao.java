@@ -51,6 +51,8 @@ public class TaskListDao {
         insert.execute(param);
     }
 
+
+
     public List<TaskItem> findAll(){
         String query = "SELECT * FROM tasklist";
 
@@ -64,11 +66,15 @@ public class TaskListDao {
         return taskItems;
     }
 
+
+
     //指定したレコードを削除するdeleteメソードを追加する
     public int delete(String id){
         int number = jdbcTemplate.update("DELETE FROM tasklist WHERE id =?",id);
         return number;
     }
+
+
 
     //指定したレコードの登録内容を更新するためのupdateメソッドを追加する
     public int update(TaskItem taskItem){

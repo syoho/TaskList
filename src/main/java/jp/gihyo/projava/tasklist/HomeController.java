@@ -27,6 +27,13 @@ public class HomeController {
 
 
 
+
+    //タスクを表すTaskItemレコードと、それを格納するためのtaskItemsフィールドを宣言する
+    record TaskItem(String id, String task,String deadline,boolean done){}
+    private List<TaskItem>taskItems = new ArrayList<>();
+
+
+
     //初期化する
     //TaskListDaoクラスのコンストラクタ
     @Autowired
@@ -36,35 +43,8 @@ public class HomeController {
 
 
 
-    @RequestMapping(value="/hello")
-    String hello(Model model){
-        model.addAttribute("time",LocalDateTime.now());
-        return "hello";
-    }
-
-
-    //タスクを表すTaskItemレコードと、それを格納するためのtaskItemsフィールドを宣言する
-    record TaskItem(String id, String task,String deadline,boolean done){}
-    private List<TaskItem>taskItems = new ArrayList<>();
-
-
-    //タスクを一覧表示するエンドポイント
-    @GetMapping("/list")
-    String listItems(Model model){
-        List<TaskItem>taskItems = dao.findAll();
-        model.addAttribute("tasklist",taskItems);
-        return "home";
-    }
-/*
-    @GetMapping("/list")
-    String listItems(Model model){
-        model.addAttribute("tasklist",taskItems);
-        return "home";
-    }
-*/
-
-
     //タスク登録のためのエンドポイント
+    //addItemメソッドは”/add”パスに紐づける（ひもづける）
     @GetMapping("/add")
     String addItem(@RequestParam("task")String task,
                    @RequestParam("deadline")String deadline) {
@@ -83,12 +63,32 @@ public class HomeController {
     }*/
 
 
+
+    //タスクを一覧表示するエンドポイント
+    //findAll()メゾットはTaskItem要素（ようそ）に持つListオブジェクトを返してくれる
+    @GetMapping("/list")
+    String listItems(Model model){
+        List<TaskItem>taskItems = dao.findAll();
+        model.addAttribute("tasklist",taskItems);
+        return "home";
+    }
+/*
+    @GetMapping("/list")
+    String listItems(Model model){
+        model.addAttribute("tasklist",taskItems);
+        return "home";
+    }
+*/
+
+
+
     //タスク情報を削除するエンドポイント
     @GetMapping("/delete")
     String deleteItem(@RequestParam("id")String id){
         dao.delete(id);
         return "redirect:/list";
     }
+
 
 
     //タスク情報を更新するエンドポイント
@@ -100,6 +100,15 @@ public class HomeController {
         TaskItem taskItem = new TaskItem(id,task,deadline,done);
         dao.update(taskItem);
         return "redirect:/list";
+    }
+
+
+
+
+    @RequestMapping(value="/hello")
+    String hello(Model model){
+        model.addAttribute("time",LocalDateTime.now());
+        return "hello";
     }
 
 
