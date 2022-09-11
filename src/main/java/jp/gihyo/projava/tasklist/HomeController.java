@@ -45,6 +45,7 @@ public class HomeController {
 
     //タスク登録のためのエンドポイント
     //addItemメソッドは”/add”パスに紐づける（ひもづける）
+    //"redirect:":表示するWebページを指定のパスにリダイレクトする
     @GetMapping("/add")
     String addItem(@RequestParam("task")String task,
                    @RequestParam("deadline")String deadline) {
