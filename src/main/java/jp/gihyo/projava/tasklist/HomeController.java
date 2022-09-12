@@ -105,7 +105,11 @@ public class HomeController {
 
 
 
-
+    //HTTPレスポンスの本体そのものではなく、対応（たいおう）するビュー名を文字列で返すようにする
+    //設定ファイルなどで別途（べっと）指定していない場合には、HTMLデンプレートのファイル名から拡張子（かくちょうし）を除いたものを使います（除く・のぞく・除き・のぞいた）
+    //hello.html->hello
+    //引数として（ひきすう）springframework.ui.Modelクラスのオブジェクトを受け取ります
+    //ModelクラスはJavaプラグラムとHTMLデンプレートの間で値を受け渡す役割を担います（担う・になう）
     @RequestMapping(value="/hello")
     String hello(Model model){
         model.addAttribute("time",LocalDateTime.now());
