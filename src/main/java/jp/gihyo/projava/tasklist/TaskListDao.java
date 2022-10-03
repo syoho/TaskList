@@ -6,7 +6,10 @@
 //-データベースにアクセスするための窓口となるオブジェクト
 //-TaskListDaoクラス
 
-
+//JDBC（Java DataBase Connectivity）
+//JavaのプログラムからRDBMSにアクセスしてデータの読み書きを行う
+//API
+//JDBCに関連するクラスやインタフェースはjava.sqlパッケージに実装されている
 
 package jp.gihyo.projava.tasklist;
 
