@@ -28,7 +28,9 @@ import java.util.Map;
 @Service
 public class TaskListDao {
 
-    //JdbcTemplateはSpring JDBCに用意されているタスク・データベースを活用するための機能を提供している
+    //JdbcTempalteクラスのフィールドが１つあります
+    //JdbcTemplateはSpring JDBCに用意されているタスク
+    //データベースを活用するための機能を提供している
     //変数はfinalになっているので、一度値をセットしたら変更できません
     private final JdbcTemplate jdbcTemplate;
 
@@ -40,6 +42,9 @@ public class TaskListDao {
     //フィールド値の初期化・Field
     //@Autowiredアノテーションを付けることで、SpringBootはコンストラクタを呼び出す際に適切なオブジェクトを作成して渡してくれるようになります
     //DI・Dependency Injection・依存性の注入（ちゅうにゅう）
+    //TaskListDaoはJdbcTemplateに依存している
+    //JdbcTemplateオブジェクトの初期化はTaskListDao内にでは行なっておらず
+    //@Autowiredアノテーションによって、DIコンテナから適切なJdbcTemplateオブジェクトを取得して利用している
     @Autowired
     TaskListDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
